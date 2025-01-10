@@ -32,3 +32,15 @@ sudo apt-get install terraform
 
 ## AWS CLI.
 ![image](https://github.com/user-attachments/assets/36d42e2c-8d9d-433e-94e7-05a62a367330)
+
+## Configure AWS credentials in command line.
+> [!NOTE]
+> Remembering to register credentials in the AWS/IAM console
+
+![image](https://github.com/user-attachments/assets/dd9c85b4-fee6-4e6f-b755-7af9182087e4)
+
+
+```
+aws configure
+```
+![image](https://github.com/user-attachments/assets/d03bd9bb-c459-4ff3-976b-12e5fa8dc8c6)

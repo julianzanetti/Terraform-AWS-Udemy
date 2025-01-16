@@ -1,5 +1,7 @@
 # Terraform/Ubuntu.
 ## Ubuntu
+- [Linux OS - Terraform Install](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
 ### Ensure that your system is up to date and you have installed the gnupg, software-properties-common, and curl packages installed.
 ```
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common

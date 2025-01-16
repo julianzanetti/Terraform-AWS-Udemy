@@ -34,3 +34,51 @@ resource "aws_instance" "ec2demo" {
   instance_type = "t2.micro"
 }
 ```
+![image](https://github.com/user-attachments/assets/b684e1cd-1df7-4287-b12f-e475249d4868)
+
+## Execute Terraform core commands.
+```
+# Initialize Terraform
+terraform init
+```
+![image](https://github.com/user-attachments/assets/bf9dcdc3-17ee-4283-8a08-7879ffe01040)
+
+```
+# Terraform Validate
+terraform validate
+```
+![image](https://github.com/user-attachments/assets/14ca114b-b7a1-47ac-bc52-3f82bfc60c3c)
+
+```
+# Terraform Plan to Verify what it is going to create / update / destroy
+terraform plan
+```
+![image](https://github.com/user-attachments/assets/7f185355-7fd9-48e8-8f42-5f4875e2cc0b)
+
+```
+# Terraform Apply to Create EC2 Instance
+terraform apply 
+```
+![image](https://github.com/user-attachments/assets/2d90d685-e2f0-4091-ad26-c94fcc98b674)
+![image](https://github.com/user-attachments/assets/1c69ad79-aea6-4c28-9887-4687ff51ee6c)
+
+## Verify the EC2 Instance in AWS Management Console.
+- Go to AWS Management Console -> Services -> EC2.
+- Verify newly created EC2 instance.
+![image](https://github.com/user-attachments/assets/1e0bb5a8-902a-468c-8951-73d53f9a883b)
+
+## Destroy Infrastructure.
+```
+# Destroy EC2 Instance
+terraform destroy
+```
+![image](https://github.com/user-attachments/assets/fdee6e80-63db-4c37-bbcb-73041e4cf657)
+![image](https://github.com/user-attachments/assets/82063779-2243-4d92-a44e-1a63898bfcaf)
+![image](https://github.com/user-attachments/assets/b20f41bc-1297-429c-a593-5bb0cc9eadfa)
+
+```
+# Delete Terraform files 
+rm -rf .terraform*
+rm -rf terraform.tfstate*
+```
+![image](https://github.com/user-attachments/assets/8d883b4c-3328-4602-8a95-ad2dada8af1a)

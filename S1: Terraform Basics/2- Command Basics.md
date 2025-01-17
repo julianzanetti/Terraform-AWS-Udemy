@@ -85,3 +85,4 @@ rm -rf terraform.tfstate*
 
 ## Understand about Arguments, Attributes and Meta-Arguments.
 - [Resource: AWS Instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#attribute-reference)
+- [Resource: Meta-Arguments](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on)

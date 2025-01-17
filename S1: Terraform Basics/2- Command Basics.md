@@ -82,7 +82,3 @@ rm -rf .terraform*
 rm -rf terraform.tfstate*
 ```
 ![image](https://github.com/user-attachments/assets/8d883b4c-3328-4602-8a95-ad2dada8af1a)
-
-## Understand about Arguments, Attributes and Meta-Arguments.
-- [Resource: AWS Instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#attribute-reference)
-- [Resource: Meta-Arguments](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on)

@@ -25,9 +25,15 @@ provider "aws" {
   profile = "default"
 }
 ```
-> [!NOTE]
+
+> [!IMPORTANT]
 > Remember configure AWS Credentials in the AWS CLI if not configured
 ```
 # Verify AWS Credentials
 cat $HOME/.aws/credentials
 ```
+
+> [!NOTE]
+> If you have more than one user configured in AWS Credentials, you can select which user to work with into the Provider Block.
+
+## Create Resource Block.

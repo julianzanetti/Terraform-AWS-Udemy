@@ -96,3 +96,14 @@ http://<PUBLIC-IP>/app1/index.html
 # Access metadata.html
 http://<PUBLIC-IP>/app1/metadata.html
 ```
+
+## Clean-Up.
+```
+# Terraform Destroy
+terraform plan -destroy  # You can view destroy plan using this command
+terraform destroy
+
+# Clean-Up Files
+rm -rf .terraform*
+rm -rf terraform.tfstate*
+```

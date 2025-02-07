@@ -44,3 +44,134 @@ key_name = var.ec2-keypair
 ![image](https://github.com/user-attachments/assets/235d9f22-da0b-43a5-aa47-71860687ed99)
 
 ## Define Security Group Resources in Terraform, Files c3-ec2securitygroups.tf
+- [Resource: aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)
+
+```
+# Create Security Group - SSH Traffic
+resource "aws_security_group" "vpc-ssh" {
+    name        = "vpc-ssh"
+    description = "Dev VPC SSH"
+    vpc_id = "vpc-0f4fe08ceb8291ee0"
+
+    ingress {
+        description = "Habilitar puerto 22"
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    
+    egress {
+        description = "Habilitar todas las IP y puertos de salida"
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# Create Security Group - Web Traffic
+resource "aws_security_group" "vpc-web" {
+    name        = "vpc-web"
+    description = "Dev VPC Web"
+    vpc_id = "vpc-0f4fe08ceb8291ee0"
+
+    ingress {
+        description = "Habilitar puerto 80"
+        from_port   = 80
+        to_port     = 80
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        description = "Habilitar puerto 443"
+        from_port   = 443
+        to_port     = 443
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    
+    egress {
+        description = "Habilitar todas las IP y puertos de salida"
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+```
+- Reference the security groups in c5-ec2instances.tf file as a list item.
+```
+# List Item
+vpc_security_group_ids = [ aws_security_group.vpc-ssh.id, aws_security_group.vpc-web.id ] 
+```
+![image](https://github.com/user-attachments/assets/c5ef0f6d-f9de-4960-9fb2-ef7d59e9db83)
+
+## Define Get Latest AMI ID for Amazon Linux2 OS, File c4-ami-datasource.tf
+- [Data Source: aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami)
+
+```
+# Get Latest AWS AMI ID for Amazon2 Linux
+data "aws_ami" "amzlinux2" {
+  most_recent = true                            # Obtenemos la ultima version de la AMI que elegimos mas adelante
+  owners = [ "amazon" ]
+  filter {
+    name = "name"
+    values = [ "amzn2-ami-kernel-*-gp2" ]       # AMI ID seleccionado, este es el nombre de nuestra AMI
+  }
+  filter {
+    name = "root-device-type"                   # Tipo de dispositivo raíz
+    values = [ "ebs" ]  
+  }
+  filter {
+    name = "virtualization-type"                # Virtualización
+    values = [ "hvm" ]
+  }
+  filter {
+    name = "architecture"
+    values = [ "x86_64" ]
+  }
+}
+```
+- Reference the datasource in c5-ec2instances.tf file.
+```
+# Reference Datasource to get the latest AMI ID
+ami = data.aws_ami.amzlinux2.id
+```
+![image](https://github.com/user-attachments/assets/99e86297-14f9-4d63-9b36-6cc01acef635)
+
+## Define EC2 Instance Resource, File c5-ec2instances.tf.
+- [Resource: aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)
+```
+# EC2 Instance
+resource "aws_instance" "mi_ec2" {
+    ami = data.aws_ami.amzlinux2.id
+    instance_type = var.tipo_instancia
+    user_data = file("${path.module}/app1-install.sh")
+    key_name = var.ec2-keypair
+    subnet_id = "subnet-0f8cb5e5d25489f1d"
+    vpc_security_group_ids = [ aws_security_group.vpc-ssh.id, aws_security_group.vpc-web.id ]
+    tags = {
+        "Name" = "EC2 Demo"
+    }
+}
+```
+
+## Define Output Values, File c6-outputs.tf
+- [Output Values](https://developer.hashicorp.com/terraform/language/values/outputs)
+
+```
+# Terraform Output Values
+# EC2 Instance Public IP
+output "instancia_ippublica" {
+    description = "IP publica de Instancia EC2"
+    value = aws_instance.mi_ec2.public_ip
+}
+
+# EC2 Instance Public DNS
+output "instancia_dnspublico" {
+    description = "DNS publico de Instancia EC2"
+    value = aws_instance.mi_ec2.public_dns
+}
+```

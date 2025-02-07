@@ -175,3 +175,23 @@ output "instancia_dnspublico" {
     value = aws_instance.mi_ec2.public_dns
 }
 ```
+
+## Execute Terraform Commands.
+```
+terraform init
+```
+![image](https://github.com/user-attachments/assets/9c428eda-5cd7-438c-8b1c-b9f2e29a6bd9)
+
+```
+terraform validate
+```
+![image](https://github.com/user-attachments/assets/b931a8aa-9400-4f37-baad-f1c413b12dce)
+
+```
+terraform plan
+```
+![image](https://github.com/user-attachments/assets/d320674a-f8d5-47cb-9e24-b76c2b843cc0)
+
+```
+terraform apply
+```

@@ -195,3 +195,51 @@ terraform plan
 ```
 terraform apply
 ```
+![image](https://github.com/user-attachments/assets/2ab791e3-601f-404c-ab0a-026ac4dce503)
+
+> [!NOTE]
+> Let's see how we obtained the values of Output variables. 
+
+## Check in the AWS Console.
+- ### EC2 Instance
+![image](https://github.com/user-attachments/assets/e7fab651-53c1-4516-b53f-f6d558678ed5)
+
+- ### Segurity Groups.
+![image](https://github.com/user-attachments/assets/9298db05-d3da-41ec-8965-9bc5018a4b70)
+
+## Access Application.
+```
+# Access index.html
+http://<PUBLIC-IP>/index.html
+http://<PUBLIC-IP>/app1/index.html
+```
+![image](https://github.com/user-attachments/assets/5d2c8477-38c0-4774-b0e9-61dd9ee99cfe)
+![image](https://github.com/user-attachments/assets/2022b9aa-7caa-44b1-ad1e-c019e12b75cf)
+
+```
+# Access metadata.html
+http://<PUBLIC-IP>/app1/metadata.html
+```
+![image](https://github.com/user-attachments/assets/b49934cf-8c38-46c8-9e8c-0a5d42a04528)
+
+## Access EC2 Instance with key-pair.
+```
+ssh -i terraform-key.pem ec2-user@IP-PUBLICA
+```
+![image](https://github.com/user-attachments/assets/c6953634-a40b-4dce-b085-7427202ab663)
+
+## Clean-Up.
+```
+# Terraform Destroy
+terraform plan -destroy  # You can view destroy plan using this command
+terraform destroy
+```
+![image](https://github.com/user-attachments/assets/27ee843b-b554-4a3b-9bc3-09709aa7b02e)
+![image](https://github.com/user-attachments/assets/729d9614-b2a8-424c-b392-f3a5dfbaf91f)
+
+```
+# Clean-Up Files
+rm -rf .terraform*
+rm -rf terraform.tfstate*
+```
+![image](https://github.com/user-attachments/assets/5c53864b-058b-48a5-ba06-b14a22dbeb38)

@@ -39,7 +39,7 @@ count = 2
 
 # count.index
   tags = {
-    "Name" = "Count-Demo-${count.index}"
+    "Name" = "EC2-Ejemplo-${count.index}"
   }
 ```
 > [!NOTE]

@@ -1,5 +1,5 @@
 # Terraform For Loops, Lists, Maps and Count Meta-Argument.
-## Example List and Maps.
+## Example List and Maps - File c2-variables.tf.
 ```
 # AWS EC2 Instance Type - List
 variable "lista_tipo_instancias" {
@@ -19,10 +19,8 @@ variable "instance_type_map" {
   }
 }
 ```
-> [!NOTE]
-> Example in the file c2-variables.tf
 
-## How to reference List or Map values.
+## How to reference List or Map values - File c5-ec2instances.tf.
 ```
 # List
 instance_type = var.instance_type_list[1]
@@ -30,10 +28,8 @@ instance_type = var.instance_type_list[1]
 # Map
 instance_type = var.instance_type_map["prod"]
 ```
-> [!NOTE]
-> Example in the file c5-ec2instances.tf
 
-## Meta-Argument Count.
+## Meta-Argument Count - File c5-ec2instances.tf.
 ```
 count = 2
 
@@ -42,11 +38,8 @@ count = 2
     "Name" = "EC2 Demo-${count.index}"
   }
 ```
-> [!NOTE]
-> Count repeats the number of times we indicate the configured resource.
-> Example in the file c5-ec2instances.tf
 
-## Outputs.
+## Outputs - File c6-outputs.tf.
 - For loop with List
 - For loop with Map
 - For loop with Map Advanced
@@ -83,8 +76,6 @@ output "latest_splat_instance_publicdns" {
   value = aws_instance.mi_ec2[*].public_dns
 }
 ```
-> [!NOTE]
-> Example in the file c6-outputs.tf
 
 ## Execute Terraform Commands.
 ```

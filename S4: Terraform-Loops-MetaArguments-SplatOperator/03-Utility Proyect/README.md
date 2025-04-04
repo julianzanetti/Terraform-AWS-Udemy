@@ -60,3 +60,89 @@ output "output_v1_1" {
 > Output have the instance value empty `[]` when `values = ["sa-east-1b"]` in location filter
 
 ## File c2-v2-get-instancetype-supported-per-az-in-a-region.tf
+- Using `for_each` create multiple instances of datasource and loop it with hard-coded availability zones in for_each
+- ## Create the datasource and its output.
+```
+data "aws_ec2_instance_type_offerings" "my_ins_type2" {
+  for_each = toset([ "sa-east-1a", "sa-east-1b" ])
+  filter {
+    name   = "instance-type"
+    values = ["t2.micro"]
+  }
+  filter {
+    name   = "location"
+    values = [each.key]
+  }
+  location_type = "availability-zone"
+}
+
+
+output "output_v2_1" {
+ #value = data.aws_ec2_instance_type_offerings.my_ins_type1.instance_types
+ value = toset([
+      for t in data.aws_ec2_instance_type_offerings.my_ins_type2 : t.instance_types
+    ])  
+}
+
+output "output_v2_2" {
+ value = { for az, details in data.aws_ec2_instance_type_offerings.my_ins_type2 :
+  az => details.instance_types }   
+}
+```
+![image](https://github.com/user-attachments/assets/c29b5934-49ac-495e-bdbb-365f4500bb68)
+
+## File c2-v3-get-instancetype-supported-per-az-in-a-region.tf
+- Get List of Availability Zones in a Specific Region
+```
+data "aws_availability_zones" "my_azones" {
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
+}
+```
+
+- Update for_each with new datasource.
+```
+data "aws_ec2_instance_type_offerings" "my_ins_type" {
+  for_each = toset(data.aws_availability_zones.my_azones.names)
+  filter {
+    name   = "instance-type"
+    values = ["t2.micro"]
+  }
+  filter {
+    name   = "location"
+    values = [each.key]
+  }
+  location_type = "availability-zone"
+}
+```
+
+- Implement Incremental Outputs till we reach what is required
+```
+# Basic Output: All Availability Zones mapped to Supported Instance Types
+output "output_v3_1" {
+ value = { for az, details in data.aws_ec2_instance_type_offerings.my_ins_type :
+  az => details.instance_types }   
+}
+
+# Filtered Output: Exclude Unsupported Availability Zones
+output "output_v3_2" {
+  value = { for az, details in data.aws_ec2_instance_type_offerings.my_ins_type :
+  az => details.instance_types if length(details.instance_types) != 0 }
+}
+
+# Filtered Output: with Keys Function - Which gets keys from a Map
+# This will return the list of availability zones supported for a instance type
+output "output_v3_3" {
+  value = keys({ for az, details in data.aws_ec2_instance_type_offerings.my_ins_type :
+  az => details.instance_types if length(details.instance_types) != 0 }) 
+}
+
+# Filtered Output: As the output is list now, get the first item from list (just for learning)
+output "output_v3_4" {
+  value = keys({ for az, details in data.aws_ec2_instance_type_offerings.my_ins_type :
+  az => details.instance_types if length(details.instance_types) != 0 })[0]
+}
+```
+![image](https://github.com/user-attachments/assets/b8f82e61-5b3d-47ab-a3b3-fcd6d787ecc8)

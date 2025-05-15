@@ -4,9 +4,9 @@
 
 ## Step 01: Introduction.
 - Create VPC using `Terraform Modules`
-- Define `Input Variables` for VPC module and reference them in VPC Terraform Module
-- Define `local values` and reference them in VPC Terraform Module 
-- Define `Output Values` for VPC
+- Define `Input Variables` for VPC module and reference them in VPC Terraform Module.
+- Define `local values` and reference them in VPC Terraform Module.
+- Define `Output Values` for VPC.
 
 ## Step 02: Create a VPC Module Terraform Configuration.
 - c1-versions.tf

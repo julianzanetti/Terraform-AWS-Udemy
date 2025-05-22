@@ -114,19 +114,29 @@ Observation:
 ![image](https://github.com/user-attachments/assets/a663fbb5-9518-46db-8604-96817d55581e)
 
 ## Step-10: Connect to Bastion EC2 Instance and Test.
+### Connect to Bastion EC2 Instance from local desktop
 ```
-# Connect to Bastion EC2 Instance from local desktop
 ssh -i private-key/terraform-key.pem ec2-user@<PUBLIC_IP_FOR_BASTION_HOST>
+```
+![image](https://github.com/user-attachments/assets/fd176c35-7d8a-4d70-a6a2-84fd1ba638be)
 
-# Curl Test for Bastion EC2 Instance to Private EC2 Instances
+### Curl Test for Bastion EC2 Instance to Private EC2 Instances
+```
 curl  http://<Private-Instance-1-Private-IP>
 curl  http://<Private-Instance-2-Private-IP>
+```
+![image](https://github.com/user-attachments/assets/92b59d84-abd0-40fc-a20c-af15622bcc3a)
+![image](https://github.com/user-attachments/assets/d67daecc-f26b-4e93-a8b7-5abce9056514)
 
-# Connect to Private EC2 Instances from Bastion EC2 Instance
+
+### Connect to Private EC2 Instances from Bastion EC2 Instance
+```
 ssh -i /tmp/terraform-key.pem ec2-user@<Private-Instance-1-Private-IP>
 cd /var/www/html
 ls -la
 ```
+![image](https://github.com/user-attachments/assets/db59cac0-cd26-4d41-8e22-12b10b31f7df)
+![image](https://github.com/user-attachments/assets/b28edd1b-78e6-42cb-a977-f500d19c23cf)
 
 ## Step-11: Clean up.
 ```

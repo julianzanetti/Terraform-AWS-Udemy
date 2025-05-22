@@ -89,3 +89,31 @@ terraform apply -auto-approve
 Observation:
 1) VERY IMPORTANT: Primarily observe that first VPC NAT Gateway will be created and after that only module.ec2_private related EC2 Instance will be created
 ```
+
+## Step-09: Review all created resources
+
+
+## Step-10: Connect to Bastion EC2 Instance and Test.
+```
+# Connect to Bastion EC2 Instance from local desktop
+ssh -i private-key/terraform-key.pem ec2-user@<PUBLIC_IP_FOR_BASTION_HOST>
+
+# Curl Test for Bastion EC2 Instance to Private EC2 Instances
+curl  http://<Private-Instance-1-Private-IP>
+curl  http://<Private-Instance-2-Private-IP>
+
+# Connect to Private EC2 Instances from Bastion EC2 Instance
+ssh -i /tmp/terraform-key.pem ec2-user@<Private-Instance-1-Private-IP>
+cd /var/www/html
+ls -la
+```
+
+## Step-11: Clean up.
+```
+# Terraform Destroy
+terraform destroy -auto-approve
+
+# Clean-Up
+rm -rf .terraform*
+rm -rf terraform.tfstate*
+```

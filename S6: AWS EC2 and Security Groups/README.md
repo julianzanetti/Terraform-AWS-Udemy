@@ -89,9 +89,29 @@ terraform apply -auto-approve
 Observation:
 1) VERY IMPORTANT: Primarily observe that first VPC NAT Gateway will be created and after that only module.ec2_private related EC2 Instance will be created
 ```
+![image](https://github.com/user-attachments/assets/7ecbfbbe-5a15-4b4e-8fe8-b9c4b6d89f44)
 
 ## Step-09: Review all created resources
+### VPC:
+![image](https://github.com/user-attachments/assets/ba6836dd-8e33-448a-ba6b-31e962d0ad7d)
 
+### Security groups:
+![image](https://github.com/user-attachments/assets/f9fb304b-238f-4683-9f59-b9ffd852b82a)
+
+- **`Public`**:
+![image](https://github.com/user-attachments/assets/bd4ecb0b-340a-4b51-a633-d0bff83e296a)
+
+- **`Private`**:
+![image](https://github.com/user-attachments/assets/f986ec79-5178-4eb9-a06d-b801543eb612)
+
+### Subredes:
+![image](https://github.com/user-attachments/assets/95936d82-6175-4b21-a8f5-0d573f594a82)
+
+### EC2 Instance:
+![image](https://github.com/user-attachments/assets/004b5eb0-e14f-444d-80f1-cf5827b00596)
+
+### Elastic IP:
+![image](https://github.com/user-attachments/assets/a663fbb5-9518-46db-8604-96817d55581e)
 
 ## Step-10: Connect to Bastion EC2 Instance and Test.
 ```

@@ -25,7 +25,8 @@ resource "null_resource" "aws_instance" {
     command = "echo VPC created on `date` and VPC ID: ${module.vpc.vpc_id} >> creation-time-vpc-id.txt"
     working_dir = "local-exec-outputs/"
   }  
-  
+
+/*
   # Local Exec Provisioner:  local-exec provisioner (Destroy-Time Provisioner - Triggered during deletion of Resource)
   provisioner "local-exec" {
     command = "echo Destroy time prov `date` >> destroy-time-prov.txt"
@@ -33,5 +34,6 @@ resource "null_resource" "aws_instance" {
     when = destroy
     #on_failure = continue
   }
+*/
 }
 

@@ -30,4 +30,62 @@
 - Copy your AWS EC2 Key pair in `private-key` folder. (Try to call it the same as `terraform-key.pem`).
 - Create folder witht name `local-exec-output-files` where `local-exec` provisioner creates a file.
 
-## Step 01 - Create all the VPC config:
+## Step 01: Create all the VPC config:
+- c1-versions.tf
+- c2-genericvariables.tf
+- c3-local-values.tf
+- c4-01-vpc-variables.tf
+- c4-02-vpc-module.tf
+- c4-03-vpc-outputs.tf
+- private-key/terraform-key.pem
+
+## Step 02: Add app-install.sh
+- Add `app1-install.sh` in working directory
+
+## Step-03: Create Security Groups for Bastion Host and Private Subnet Hosts.
+- c5-01-securitygroup-public.tf
+- c5-02-securitygroup-private.tf
+- c5-03-securitygroup-outputs.tf
+
+## Step-04: Get the latest AMI ID for Amazon Linux2 OS
+- c6-datasource-ami.tf
+
+## Step-05: EC2 Instances:
+- c7-01-ec2instances-variables.tf
+- c7-02-ec2instances-public.tf
+- c7-03-ec2instances-private.tf
+- c7-04-ec2instances-outputs.tf
+
+## Step-06: Create Elastic Ip for Bastion Host.
+- c8-elasticip.tf
+
+## Step-07: Create a Null Resource and Provisioners
+- Modify c1-versions.tf and add:
+```
+null = {
+  source = "hashicorp/null"
+  version = "~> 3.0.0"
+}   
+```
+- c9-nullresources-provisioners.tf
+
+## Step-08: Execute Terraform commands
+```
+# Terraform Initialize
+terraform init
+
+# Terraform Validate
+terraform validate
+
+# Terraform Plan
+terraform plan
+Observation: 
+1) Review Security Group resources 
+2) Review EC2 Instance resources
+3) Review all other resources (vpc, elasticip) 
+
+# Terraform Apply
+terraform apply -auto-approve
+Observation:
+1) VERY IMPORTANT: Primarily observe that first VPC NAT Gateway will be created and after that only module.ec2_private related EC2 Instance will be created
+```

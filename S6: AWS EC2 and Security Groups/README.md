@@ -40,7 +40,7 @@
 - private-key/terraform-key.pem
 
 ## Step 02: Add app-install.sh
-- Add `app1-install.sh` in working directory
+- Add `app1-install.sh` in working directory.
 
 ## Step-03: Create Security Groups for Bastion Host and Private Subnet Hosts.
 - c5-01-securitygroup-public.tf

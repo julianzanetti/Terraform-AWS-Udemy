@@ -138,6 +138,9 @@ ls -la
 ![image](https://github.com/user-attachments/assets/db59cac0-cd26-4d41-8e22-12b10b31f7df)
 ![image](https://github.com/user-attachments/assets/b28edd1b-78e6-42cb-a977-f500d19c23cf)
 
+### See the local-exec-output.
+![image](https://github.com/user-attachments/assets/75cff5ff-3275-4c3e-9e1f-52a549aa60cc)
+
 ## Step-11: Clean up.
 ```
 # Terraform Destroy

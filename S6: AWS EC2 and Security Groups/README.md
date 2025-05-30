@@ -1,6 +1,6 @@
 # Create AWS VPC + EC2 Instances + Security Groups with Terraform.
 ## The infrastructure:
-![image](https://github.com/user-attachments/assets/9f957dba-1ef3-4b18-b366-ec62b118fc28)
+![image](https://github.com/user-attachments/assets/bbc9c9bb-83a7-402f-bc5d-eaa1d2e351ec)
 
 ## Terraform Modules we will use:
 - [terraform-aws-modules/vpc/aws](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)

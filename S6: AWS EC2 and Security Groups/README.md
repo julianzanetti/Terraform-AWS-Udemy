@@ -104,7 +104,7 @@ Observation:
 - **`Private`**:
 ![image](https://github.com/user-attachments/assets/f986ec79-5178-4eb9-a06d-b801543eb612)
 
-### Subredes:
+### Subnets:
 ![image](https://github.com/user-attachments/assets/95936d82-6175-4b21-a8f5-0d573f594a82)
 
 ### EC2 Instance:

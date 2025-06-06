@@ -10,6 +10,16 @@ module "loadbalancer-security-group" {
   ingress_rules = ["http-80-tcp"]
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 8081
+      to_port     = 8081
+      protocol    = 6
+      description = "Allow Port 8081 from internet"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+
   # Egress Rules:
   egress_rules = ["all-all"]
 

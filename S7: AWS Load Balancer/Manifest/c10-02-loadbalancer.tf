@@ -16,7 +16,7 @@ module "elb" {
     {
       instance_port     = 80
       instance_protocol = "HTTP"
-      lb_port           = 81
+      lb_port           = 8081
       lb_protocol       = "HTTP"
     },
   ]

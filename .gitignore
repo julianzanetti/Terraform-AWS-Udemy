@@ -1,1 +1,5 @@
-private-key/
+.gitignore
+**/private-key/
+**/.terraform*
+**/terraform.tfstate*
+**/local-exec-outputs/

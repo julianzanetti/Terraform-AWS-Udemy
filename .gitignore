@@ -1,4 +1,4 @@
-.gitignore
+# Terraform
 **/private-key/
 **/.terraform*
 **/terraform.tfstate*

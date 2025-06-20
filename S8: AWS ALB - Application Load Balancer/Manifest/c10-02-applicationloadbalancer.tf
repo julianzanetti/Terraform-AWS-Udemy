@@ -2,7 +2,8 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "9.17.0"
 
-  name    = "alb-application"
+  name    = "${local.name}-alb"
+  load_balancer_type = "application"
   vpc_id  = module.vpc.vpc_id
   subnets = module.vpc.public_subnets
 
@@ -23,7 +24,8 @@ module "alb" {
 # Target Groups
   target_groups = {
     my-tg1 = {
-      name_prefix                       = "tg1-"
+      create_attachment = false
+      name_prefix                       = "mytg1-"
       protocol                          = "HTTP"
       port                              = 80
       target_type                       = "instance"
@@ -32,11 +34,6 @@ module "alb" {
       load_balancing_anomaly_mitigation = "on"
       load_balancing_cross_zone_enabled = false
       protocol_version = "HTTP1"
-      # VERY IMPORTANT: We will create aws_lb_target_group_attachment resource separately when we use create_attachment = false, refer above GitHub issue URL.
-      # Attachments will be made externally
-      # Github ISSUE: https://github.com/terraform-aws-modules/terraform-aws-alb/issues/316
-      # Search for "create_attachment" to jump to that Github issue solution
-      create_attachments = false
 
       target_group_health = {
         dns_failover = {
@@ -64,8 +61,9 @@ module "alb" {
   tags = local.commom_tags
 }
 
-resource "aws_lb_target_group_attachment" "my-tg1" {
-  for_each = {for ec2-instance, ec2-details in module.private_ec2_instance: ec2-instance => ec2-details}
+# Load Balancer Target Group Attachment
+resource "aws_lb_target_group_attachment" "mytg1" {
+  for_each = {for k, v in module.private_ec2_instance: k => v}
   target_group_arn = module.alb.target_groups["my-tg1"].arn
   target_id        = each.value.id
   port             = 80

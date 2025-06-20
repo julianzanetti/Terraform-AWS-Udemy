@@ -19,6 +19,13 @@
 - c10-02-applicationloadbalancer.tf
 - c10-03-applicationloadbalancer-outputs.tf
 
+> [!IMPORTANT]
+> We will create in c10-02-applicationloadbalancer.tf aws_lb_target_group_attachment resource separately when we use create_attachment = false, refer above GitHub issue URL.
+> 
+> Github ISSUE: https://github.com/terraform-aws-modules/terraform-aws-alb/issues/316
+> 
+> Search for "create_attachment" to jump to that Github issue solution
+
 ## Step 03: Execute Terraform Commands.
 ```
 # Terraform Initialize

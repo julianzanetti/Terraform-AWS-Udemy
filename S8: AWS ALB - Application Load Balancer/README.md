@@ -48,13 +48,14 @@ terraform apply -auto-approve
 ### Load Balancer SG
 
 
-### Load Balancer Instances are healthy
+### ALB Listeners and Rules
 
 
-### App using Load Balancer DNS Name
+### ALB Target Groups, Targets (should be healthy) and Health Check settings
 
 
-### App with port 81 using Load Balancer DNS Name
+### Access sample app using Load Balancer DNS Name
+
 
 ## Step 05: Clean Up.
 ```
